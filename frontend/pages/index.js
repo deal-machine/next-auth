@@ -1,6 +1,7 @@
 import { useState } from "react";
-
+import { useRouter } from "next/router";
 export default function HomeScreen() {
+  const router = useRouter();
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -20,8 +21,10 @@ export default function HomeScreen() {
     <div>
       <h1>Login</h1>
       <form
+        method="POST"
         onSubmit={(event) => {
           event.preventDefault();
+          router.push("/auth-page-ssr");
         }}
       >
         <input
@@ -37,7 +40,6 @@ export default function HomeScreen() {
           value={values.password}
           onChange={handleChange}
         />
-        {console.log(values)}
         <div>
           <button>Entrar</button>
         </div>
