@@ -1,4 +1,4 @@
-export function AuthPageStatic(props) {
+function AuthPageStatic(props) {
   return (
     <div>
       <h1>Static Auth Page</h1>
@@ -6,3 +6,4 @@ export function AuthPageStatic(props) {
     </div>
   );
 }
+export default AuthPageStatic;

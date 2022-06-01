@@ -1,4 +1,4 @@
-export function AuthPageServerSideRendering(props) {
+function AuthPageServerSideRendering(props) {
   return (
     <div>
       <h1>Server-Side-Rendering Auth Page</h1>
@@ -6,3 +6,4 @@ export function AuthPageServerSideRendering(props) {
     </div>
   );
 }
+export default AuthPageServerSideRendering;
