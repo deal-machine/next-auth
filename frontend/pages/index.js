@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+
+import { authService } from "../src/services/auth/authService";
+
 export default function HomeScreen() {
   const router = useRouter();
   const [values, setValues] = useState({
@@ -24,7 +27,18 @@ export default function HomeScreen() {
         method="POST"
         onSubmit={(event) => {
           event.preventDefault();
-          router.push("/auth-page-ssr");
+
+          authService
+            .login({
+              username: values.username,
+              password: values.password,
+            })
+            .then(() => {
+              router.push("/auth-page-ssr");
+            })
+            .catch(() => {
+              alert("Username or password is invalid");
+            });
         }}
       >
         <input
