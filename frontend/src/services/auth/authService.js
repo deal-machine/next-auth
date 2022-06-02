@@ -1,16 +1,11 @@
+import { HttpClient } from "../../infra/httpClient/HttpClient";
+
 export const authService = {
   async login({ username, password }) {
-    fetch("http://localhost:4000/api/login", {
-      headers: {
-        "Content-Type": "application/json",
-      },
+    return HttpClient("http://localhost:4000/api/login", {
       method: "POST",
-      body: JSON.stringify({
-        username,
-        password,
-      }),
+      body: { username, password },
     }).then((resp) => {
-      console.log(resp);
       if (!resp.ok) throw new Error("Username or password is invalid");
 
       console.log(resp.body);
