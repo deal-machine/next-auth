@@ -1,14 +1,15 @@
 import { HttpClient } from "../../infra/httpClient/HttpClient";
+import { tokenService } from "../token/tokenService";
 
 export const authService = {
   async login({ username, password }) {
     return HttpClient("http://localhost:4000/api/login", {
       method: "POST",
       body: { username, password },
-    }).then((resp) => {
-      if (!resp.ok) throw new Error("Username or password is invalid");
+    }).then(({ body, ok }) => {
+      if (!ok) throw new Error("Username or password is invalid");
 
-      console.log(resp.body);
+      tokenService.save(body.data.access_token);
     });
   },
 };
