@@ -7,3 +7,11 @@ function AuthPageServerSideRendering(props) {
   );
 }
 export default AuthPageServerSideRendering;
+
+export async function getServerSideProps(ctx) {
+  return {
+    props: {
+      session: {},
+    },
+  };
+}
