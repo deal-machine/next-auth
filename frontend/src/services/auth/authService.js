@@ -12,4 +12,19 @@ export const authService = {
       tokenService.save(body.data.access_token);
     });
   },
+  async getSession(token) {
+    return HttpClient("http://localhost:4000/api/session", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token.ACCESS_TOKEN_KEY}`,
+      },
+    }).then(({ body: { data }, ok }) => {
+      if (!ok) {
+        tokenService.delete();
+        throw new Error("Not Authorized");
+      }
+
+      return { session: data };
+    });
+  },
 };
