@@ -13,10 +13,11 @@ export const authService = {
     });
   },
   async getSession(token) {
+    const accessToken = token ? token.ACCESS_TOKEN_KEY : tokenService.get();
     return HttpClient("http://localhost:4000/api/session", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token.ACCESS_TOKEN_KEY}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     }).then(({ body: { data }, ok }) => {
       if (!ok) {
